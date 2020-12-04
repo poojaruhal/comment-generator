@@ -14,11 +14,11 @@ CommentGenerator >> generateDocument [
 	| w |
 	w := WriteStream on: String new.
 	self generateNameOn: w.
-	w lf; lf.
+	w cr; cr.
 	self genereateUsersOn: w.
-	w lf.
+	w cr.
 	self genererateUsedOn: w.
-	w lf.
+	w cr.
 	self genereratePublicMethodsOn: w.
 	^ w contents
 ]
@@ -33,11 +33,11 @@ CommentGenerator >> generateNameOn: stream [
 { #category : #'as yet unclassified' }
 CommentGenerator >> genereateUsersOn: stream [
 	"Write the users of the target class on stream"
-	stream nextPutAll: 'Users: '; lf.
+	stream nextPutAll: 'Users: '; cr.
 	self whoIsUsingTarget do: [ :cls |
 		stream nextPutAll: ' - '.
 		stream nextPutAll: cls name.
-		stream lf.
+		stream cr.
 		 ]
 
 ]
@@ -45,11 +45,11 @@ CommentGenerator >> genereateUsersOn: stream [
 { #category : #'as yet unclassified' }
 CommentGenerator >> genereratePublicMethodsOn: stream [
 	"Write the public method of the target class on stream"
-	stream nextPutAll: 'Public methods:'; lf.
+	stream nextPutAll: 'Public methods:'; cr.
 	self publicMethods do: [ :methodName |
 		stream nextPutAll: ' - '.
 		stream nextPutAll: methodName.
-		stream lf.
+		stream cr.
 		 ]
 
 ]
@@ -58,11 +58,11 @@ CommentGenerator >> genereratePublicMethodsOn: stream [
 CommentGenerator >> genererateUsedOn: stream [
  
 	"Write the classes used by the target class on stream"
-	stream nextPutAll: 'Used: '; lf.
+	stream nextPutAll: 'Used: '; cr.
 	self whoIsUsedByTarget do: [ :cls |
 		stream nextPutAll: ' - '.
 		stream nextPutAll: cls name.
-		stream lf.
+		stream cr.
 		 ]
 
 ]

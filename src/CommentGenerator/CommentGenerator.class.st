@@ -33,7 +33,7 @@ CommentGenerator >> generateDocument [
 CommentGenerator >> generateKeywordsOn: stream [
 	"Write the name of the target class on stream"
 	| keywords |
-	keywords := ((((targetClass selectors flatCollect: #splitCamelCase) collect: #asLowercase) groupedBy: #yourself) associations sort: [ :assoc1 :assoc2 | assoc1 value size > assoc2 value size ]) collect: #key.
+	keywords := ((((targetClass selectors flatCollect: #splitCamelCase) collect: [ :k | k asLowercase copyWithoutAll: ':' ]) groupedBy: #yourself) associations sort: [ :assoc1 :assoc2 | assoc1 value size > assoc2 value size ]) collect: #key.
 	
 	stream nextPutAll: 'Keywords: '.
 	stream nextPutAll: (',' join: (keywords copyFrom: 1 to: (10 min: keywords size)))

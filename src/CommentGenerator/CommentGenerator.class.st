@@ -4,6 +4,9 @@ Class {
 	#instVars : [
 		'targetClass'
 	],
+	#classInstVars : [
+		'w'
+	],
 	#category : #'CommentGenerator-Core'
 }
 
@@ -20,7 +23,25 @@ CommentGenerator >> generateDocument [
 	self genererateUsedOn: w.
 	w cr.
 	self genereratePublicMethodsOn: w.
+	w cr.
+	self generateKeywordsOn: w.
 	^ w contents
+	
+]
+
+{ #category : #'as yet unclassified' }
+CommentGenerator >> generateKeywordsOn: stream [
+	"Write the name of the target class on stream"
+	| keywords |
+	keywords := ((((targetClass selectors flatCollect: #splitCamelCase) collect: #asLowercase) groupedBy: #yourself) associations sort: [ :assoc1 :assoc2 | assoc1 value size > assoc2 value size ]) collect: #key.
+	
+	stream nextPutAll: 'Keywords: '.
+	stream nextPutAll: (',' join: (keywords copyFrom: 1 to: (10 min: keywords size)))
+	
+
+
+
+
 ]
 
 { #category : #'as yet unclassified' }

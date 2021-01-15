@@ -30,12 +30,13 @@ Users:
 
 Used: 
  - CGDriver
- - CGEngine
  - Object
+ - CGEngine
 
 Public methods:
  - addOneHour
-'
+
+Keywords: hour,one,add,initialize'
 ]
 
 { #category : #tests }
